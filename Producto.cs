@@ -16,14 +16,14 @@ namespace WebScrapingProducts
         {
             List<Producto> resultados = new List<Producto>();
             Random rng = new Random();
-            string[] perifericos = new string[] { "Mouse", "Teclado", "Cable", "Auriculares", "Joystick" };
+            string[] perifericos = new string[] { "mouse", "teclado", "cable", "auriculares", "joystick"};
             foreach (var item in components)
             {
                 Producto prod = new Producto();
                 prod.Nombre = getNombre(item);
                 prod.Precio = float.Parse(getPrecio(item));
                 prod.Stock = rng.Next(0, 25);
-                prod.Idcategoria = ((prod.Nombre.Split(' ').Where(x => perifericos.Contains(x))).Count() != 0) ? 2 : 1;
+                prod.Idcategoria = ((prod.Nombre.Split(' ').Where(x => perifericos.Contains(x.ToLower()))).Count() != 0) ? 2 : 1;
                 resultados.Add(prod);
             }
             return resultados.ToArray();
